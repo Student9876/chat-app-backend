@@ -20,7 +20,7 @@ dotenv.config();
 const app = express();
 const server = http.createServer(app);
 const PORT_FRONTEND = process.env.PORT_FRONTEND;
-const PORT_BACKEND = process.env.PORT_BACKEND;
+const PORT = process.env.PORT;
 const FRONTEND_URL = process.env.FRONTEND_URL || "";
 // Middleware
 app.use(cors({
@@ -53,6 +53,6 @@ mongoose
     .then(() => console.log("Connected to MongoDB"))
     .catch((error) => console.error("MongoDB connection error:", error));
 
-server.listen(PORT_BACKEND, () => {
-    console.log(`Server running on port ${PORT_BACKEND}`);
+server.listen(PORT, () => {
+    console.log(`Server running on port ${PORT}`);
 });
