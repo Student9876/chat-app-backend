@@ -6,7 +6,7 @@
 		"dev": "npm run dev:backend",
 		"dev:backend": "ts-node index.ts",
 		"start:backend": "ts-node index.ts",
-		"start": "npm run start:backend\"",
+		"start": "npm run start:backend",
 		"lint": "next lint"
 	},
 	"dependencies": {
