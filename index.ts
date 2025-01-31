@@ -5,6 +5,7 @@ import dotenv from "dotenv";
 import mongoose from "mongoose";
 
 // Import routes
+import rootRoute from "./routes/rootRoutes";
 import authRoutes from "./routes/authRoutes";
 import chatRoutes from "./routes/chatRoutes";
 import userRoutes from "./routes/userRoutes";
@@ -14,23 +15,24 @@ import imageRoutes from "./routes/imageRoutes";
 // Socket.IO setup
 import { initializeSocket } from "./utils/socket";
 import { cloudinaryConfig } from "./utils/cloudinary";
+import { root } from "postcss";
 
 dotenv.config();
 
 const app = express();
 const server = http.createServer(app);
-const PORT_FRONTEND = process.env.PORT_FRONTEND;
 const PORT = process.env.PORT;
 const FRONTEND_URL = process.env.FRONTEND_URL || "";
 // Middleware
 app.use(cors({
-    origin: [`http://localhost:${PORT_FRONTEND}`, FRONTEND_URL],
+    origin: [FRONTEND_URL],
     methods: ["GET", "POST"],
     credentials: true,
 }));
 app.use(express.json());
 
 // Routes
+app.use("/", rootRoute);
 app.use("/api/auth", authRoutes);
 app.use("/api/chats", chatRoutes);
 app.use("/api/users", userRoutes);
