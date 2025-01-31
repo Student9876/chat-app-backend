@@ -3,10 +3,7 @@
 	"version": "0.1.0",
 	"private": true,
 	"scripts": {
-		"dev": "npm run dev:backend",
-		"dev:backend": "ts-node index.ts",
-		"start:backend": "ts-node index.ts",
-		"start": "npm run start:backend",
+		"start": "ts-node index.ts",
 		"lint": "next lint"
 	},
 	"dependencies": {
