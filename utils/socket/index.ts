@@ -3,10 +3,12 @@ import { Server as HTTPServer } from "http"; // Import the type for an HTTP serv
 
 let io: Server | null = null;
 const FRONTEND_URL = process.env.FRONTEND_URL;
+
+
 export const initializeSocket = (server: HTTPServer): void => {
     io = new Server(server, {
         cors: {
-            origin: `${FRONTEND_URL}`,
+            origin: FRONTEND_URL,
             methods: ["GET", "POST"],
             credentials: true,
         },
