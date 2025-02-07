@@ -15,19 +15,24 @@ import imageRoutes from "./routes/imageRoutes";
 // Socket.IO setup
 import { initializeSocket } from "./utils/socket";
 import { cloudinaryConfig } from "./utils/cloudinary";
-import { root } from "postcss";
 
 dotenv.config();
 
 const app = express();
 const server = http.createServer(app);
 const PORT = process.env.PORT;
-const FRONTEND_URL = process.env.FRONTEND_URL || "";
+const allowedOrigins = ['https://mychatapp-60.vercel.app', 'http://localhost:3000'];
 // Middleware
 app.use(cors({
-    origin: [FRONTEND_URL],
-    methods: ["GET", "POST"],
-    credentials: true,
+    origin: function (origin, callback) {
+        // Allow requests with no origin (like mobile apps or curl requests)
+        if (!origin) return callback(null, true);
+        if (allowedOrigins.indexOf(origin) === -1) {
+            const msg = 'The CORS policy for this site does not allow access from the specified Origin.';
+            return callback(new Error(msg), false);
+        }
+        return callback(null, true);
+    }
 }));
 app.use(express.json());
 
